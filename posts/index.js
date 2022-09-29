@@ -18,7 +18,7 @@ app.get('/posts', (req, res) => {
 });
 
 // CREATE
-app.post('/posts', (req, res) => {
+app.post('/posts', async (req, res) => {
   // generate random hex id
   const id = randomBytes(4).toString('hex');
   const { title } = req.body;
@@ -27,6 +27,15 @@ app.post('/posts', (req, res) => {
   posts[id] = {
     id, title
   };
+
+  // send created post to event-bus
+  await axios.post('http://localhost:4005/events', {
+    type: 'PostCreated',
+    // post object
+    data: {
+      id, title
+    }
+  })
 
   res.status(201).send(posts[id]);
 });
