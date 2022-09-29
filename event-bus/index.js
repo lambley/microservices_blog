@@ -13,14 +13,17 @@ app.post('/events', (req, res) => {
   // send event to:
   // Post microservice
   axios.post('http://localhost:4000/events', event).catch((err) => {
+    console.log('Post failed');
     console.log(err.message);
   });
   // Comment microservice
   axios.post('http://localhost:4001/events', event).catch((err) => {
+    console.log('Comment failed');
     console.log(err.message);
   });
   // Query microservice
   axios.post('http://localhost:4002/events', event).catch((err) => {
+    console.log('Query failed');
     console.log(err.message);
   });
 
