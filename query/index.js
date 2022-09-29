@@ -30,7 +30,7 @@ app.get('/posts', (req, res) => {
 });
 
 // event handler route
-app.post('events', (req, res) => {
+app.post('/events', (req, res) => {
   const { type, data } = req.body;
 
   if (type === 'PostCreated') {
