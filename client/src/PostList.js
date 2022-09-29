@@ -9,7 +9,8 @@ const PostList = () => {
 
   // fetch Posts
   const fetchPosts = async () => {
-    const res = await axios.get('http://localhost:4000/posts');
+    // request from query service
+    const res = await axios.get('http://localhost:4002/posts');
 
     setPosts(res.data)
   }
@@ -28,7 +29,7 @@ const PostList = () => {
       >
         <div className="card-body">
           <h3 className="card-title">{post.title}</h3>
-          <CommentList postId={post.id}/>
+          <CommentList comments={post.comments}/>
           <CommentCreate postId={post.id} />
         </div>
       </div>
