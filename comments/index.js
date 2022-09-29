@@ -46,6 +46,14 @@ app.post('/posts/:id/comments', async (req, res) => {
   res.status(201).send(comments);
 })
 
+// Comment request handler
+app.post('/events', (req, res) => {
+  // log event type received
+  console.log('Received event', req.body.type);
+
+  res.send({});
+})
+
 // port listener
 app.listen(4001, () => {
   console.log("listening on 4001");

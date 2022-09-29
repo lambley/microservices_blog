@@ -40,6 +40,14 @@ app.post('/posts', async (req, res) => {
   res.status(201).send(posts[id]);
 });
 
+// Post request handler
+app.post('/events', (req, res) => {
+  // log event type received
+  console.log('Received event', req.body.type);
+
+  res.send({});
+})
+
 // port listener
 app.listen(4000, () => {
   console.log("listening on 4000");
