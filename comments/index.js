@@ -52,6 +52,20 @@ app.post('/events', (req, res) => {
   // log event type received
   console.log('Received event', req.body.type);
 
+  const { type, data } = req.body;
+
+  // check moderation status of comment
+  if (type === 'CommentCreated') {
+    const { postId, id, status } = data;
+    // find comment in comments array
+    const comments = commentsByPostId[postId];
+    const comment = comments.find(comment => {
+      return comment.id === id;
+    });
+    // update comment status
+    comment.status = status;
+  }
+
   res.send({});
 })
 
