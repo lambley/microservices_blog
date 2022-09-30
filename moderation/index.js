@@ -13,7 +13,7 @@ app.post('/events', async (req, res) => {
   const { type, data } = req.body
 
   // check if event is comment
-  if (type == 'CommentCreated') {
+  if (type === 'CommentCreated') {
     // check if comment contains moderation string
     const status = data.content.includes('orange') ? 'rejected' : 'approved';
 
