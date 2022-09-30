@@ -33,31 +33,34 @@ app.get('/posts', (req, res) => {
 app.post('/events', (req, res) => {
   const { type, data } = req.body;
 
-  if (type === 'PostCreated') {
-    const { id, title  } = data;
-
-    posts[id] = { id, title, comments: [] };
-  }
-
-  if (type === 'CommentCreated') {
-    const { id, content, postId, status } = data;
-
-    const post = posts[postId];
-    post.comments.push({ id, content, status });
-  }
-
-  if (type === 'CommentUpdated') {
-    const { id, content, postId, status } = data
-
-    // find post and comment
-    const post = posts[postId]
-    const comment = post.comments.find(comment => {
-      return comment.id === id;
-    });
-
-    // update both status and content, as both may have changed
-    comment.status = status
-    comment.content = content
+  switch(type) {
+    case 'PostCreated':
+      // create new post in query service, with no comments as default
+      posts[data.id] = {
+        id: data.id,
+        title: data.title,
+        comments: []
+      };
+      break;
+    case 'CommentCreated':
+      // find post comment belongs to and add comment
+      const createdPost = posts[data.postId]
+      createdPost.comments.push({
+        id: data.id,
+        content: data.content,
+        status: data.status
+      })
+      break;
+    case 'CommentUpdated':
+      // find post comment belongs to and update comments status and content
+      const updatedPost = posts[data.postId]
+      const comment = updatedPost.comments.find(comment => {
+        return comment.id === data.id;
+      });
+      // update both status and content, as both may have changed
+      comment.status = data.status
+      comment.content = data.content
+      break;
   }
 
   res.send({});
