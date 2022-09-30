@@ -14,11 +14,11 @@ app.post('/events', async (req, res) => {
 
   // check if event is comment
   if (type === 'CommentCreated') {
+    const { id, postId, content } = data
     // check if comment contains moderation string
-    const status = data.content.includes('orange') ? 'rejected' : 'approved';
+    const status = content.includes('orange') ? 'rejected' : 'approved';
 
     // post CommentModerated event to event bus
-    const { id, postId, content } = data
     await axios.post('http://localhost:4005/events', {
       type: 'CommentModerated',
       data: {
