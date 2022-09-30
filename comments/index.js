@@ -28,17 +28,18 @@ app.post('/posts/:id/comments', async (req, res) => {
   // check if comment for that post exist or return empty array
   const comments = commentsByPostId[req.params.id] || [];
 
-  // add comment to comments array
-  comments.push({id: commentId, content});
+  // add comment to comments array, add default moderation status
+  comments.push({id: commentId, content, status: 'pending'});
   commentsByPostId[req.params.id] = comments;
 
-  // send comment to event bus
+  // send CommentCreated event to event bus
   await axios.post('http://localhost:4005/events', {
     type: 'CommentCreated',
     data: {
       id: commentId,
       content,
-      postId: req.params.id
+      postId: req.params.id,
+      status: 'pending'
     }
   })
 
