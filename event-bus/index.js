@@ -6,9 +6,16 @@ const axios = require('axios');
 const app = express();
 app.use(bodyParser.json());
 
+// initialize empty event store
+const events = [];
+
 // Routes and event handlers
+// POST routes - send events to each service
 app.post('/events', (req, res) => {
   const event = req.body;
+
+  // add event to end of events array
+  events.push(event);
 
   // send event to:
   // Post microservice
@@ -34,6 +41,10 @@ app.post('/events', (req, res) => {
   res.send({status: 'OK'});
 })
 
+// GET route - index of all events
+app.get('/events', (req, res) => {
+  res.send(events);
+})
 // Event bus listener
 app.listen(4005, () => {
   console.log('Listening on 4005');
