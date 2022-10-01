@@ -19,4 +19,5 @@ Built and based off [this course](https://www.udemy.com/course/microservices-wit
 - Created from scratch for learning purposes using Express (sending `event data` via an `/events` route in each microservice)
 - Includes an event store (in memory), to account for service downtime and for the Query service to check for missing posts, comments or moderation
 
-more to follow...
+## Service Model
+![image](https://user-images.githubusercontent.com/42571140/193404032-50b4f4fd-3336-4844-86fa-f80d4503a539.png)
