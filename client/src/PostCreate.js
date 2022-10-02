@@ -14,6 +14,8 @@ const PostCreate = () => {
     });
 
     setTitle('');
+    // reload page on submit
+    window.location.reload(false)
   };
 
   // PostCreate component
