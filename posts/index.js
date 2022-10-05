@@ -50,5 +50,6 @@ app.post('/events', (req, res) => {
 
 // port listener
 app.listen(4000, () => {
+  console.log('v1 - stable');
   console.log("listening on 4000");
 });
