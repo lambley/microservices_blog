@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  # specifies number of pods to run
+  replicas: 1
+  # selector - find all pods with label 'Posts'
+  selector:
+    matchLabels:
+      app: posts
+  # template - specify individual pod configuration
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: docker.io/lambley/posts:0.0.1
