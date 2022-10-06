@@ -18,3 +18,21 @@ spec:
       containers:
         - name: posts
           image: docker.io/lambley/posts:latest
+# Cluster IP service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-clusterip-srv
+spec:
+  # if not specified, Kubernetes defaults to Cluster IP service
+  type: ClusterIP
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      # port for the NodePort
+      port: 4000
+      # port for internal redirection
+      targetPort: 4000
