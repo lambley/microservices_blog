@@ -18,3 +18,21 @@ spec:
       containers:
         - name: event-bus
           image: docker.io/lambley/event-bus:latest
+# Cluster IP service (colocated)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec:
+  # if not specified, Kubernetes defaults to Cluster IP service
+  type: ClusterIP
+  selector:
+    app: event-bus
+  ports:
+    - name: event-bus
+      protocol: TCP
+      # port for the NodePort
+      port: 4005
+      # port for internal redirection
+      targetPort: 4005
