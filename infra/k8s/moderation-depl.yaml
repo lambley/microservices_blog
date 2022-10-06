@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  # specifies number of pods to run
+  replicas: 1
+  # selector - find all pods with label 'moderation'
+  selector:
+    matchLabels:
+      app: moderation
+  # template - specify individual pod configuration
+  template:
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: docker.io/lambley/moderation:latest
+# Cluster IP service (colocated)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-srv
+spec:
+  # if not specified, Kubernetes defaults to Cluster IP service
+  type: ClusterIP
+  selector:
+    app: moderation
+  ports:
+    - name: moderation
+      protocol: TCP
+      # port for the NodePort
+      port: 4003
+      # port for internal redirection
+      targetPort: 4003

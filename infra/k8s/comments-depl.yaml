@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-depl
+spec:
+  # specifies number of pods to run
+  replicas: 1
+  # selector - find all pods with label 'comments'
+  selector:
+    matchLabels:
+      app: comments
+  # template - specify individual pod configuration
+  template:
+    metadata:
+      labels:
+        app: comments
+    spec:
+      containers:
+        - name: comments
+          image: docker.io/lambley/comments:latest
+# Cluster IP service (colocated)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-srv
+spec:
+  # if not specified, Kubernetes defaults to Cluster IP service
+  type: ClusterIP
+  selector:
+    app: comments
+  ports:
+    - name: comments
+      protocol: TCP
+      # port for the NodePort
+      port: 4001
+      # port for internal redirection
+      targetPort: 4001

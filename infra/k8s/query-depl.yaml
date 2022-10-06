@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-depl
+spec:
+  # specifies number of pods to run
+  replicas: 1
+  # selector - find all pods with label 'query'
+  selector:
+    matchLabels:
+      app: query
+  # template - specify individual pod configuration
+  template:
+    metadata:
+      labels:
+        app: query
+    spec:
+      containers:
+        - name: query
+          image: docker.io/lambley/query:latest
+# Cluster IP service (colocated)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: query-srv
+spec:
+  # if not specified, Kubernetes defaults to Cluster IP service
+  type: ClusterIP
+  selector:
+    app: query
+  ports:
+    - name: query
+      protocol: TCP
+      # port for the NodePort
+      port: 4002
+      # port for internal redirection
+      targetPort: 4002
