@@ -19,26 +19,26 @@ app.post('/events', (req, res) => {
 
   // send event to:
   // Post microservice
-  axios.post('http://localhost:4000/events', event).catch((err) => {
+  axios.post('http://posts-clusterip-srv:4000/events', event).catch((err) => {
     console.log('Post failed');
     console.log(err.message);
   });
   // Comment microservice
-  axios.post('http://localhost:4001/events', event).catch((err) => {
-    console.log('Comment failed');
-    console.log(err.message);
-  });
-  // Query microservice
-  axios.post('http://localhost:4002/events', event).catch((err) => {
-    console.log('Query failed');
-    console.log(err.message);
-  });
-  // Moderation microservice
-  axios.post('http://localhost:4003/events', event).catch((err) => {
-    console.log('Moderation failed');
-    console.log(err.message);
-  });
-  res.send({status: 'OK'});
+  // axios.post('http://localhost:4001/events', event).catch((err) => {
+  //   console.log('Comment failed');
+  //   console.log(err.message);
+  // });
+  // // Query microservice
+  // axios.post('http://localhost:4002/events', event).catch((err) => {
+  //   console.log('Query failed');
+  //   console.log(err.message);
+  // });
+  // // Moderation microservice
+  // axios.post('http://localhost:4003/events', event).catch((err) => {
+  //   console.log('Moderation failed');
+  //   console.log(err.message);
+  // });
+  // res.send({status: 'OK'});
 })
 
 // GET route - index of all events
