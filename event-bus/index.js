@@ -24,21 +24,21 @@ app.post('/events', (req, res) => {
     console.log(err.message);
   });
   // Comment microservice
-  // axios.post('http://localhost:4001/events', event).catch((err) => {
-  //   console.log('Comment failed');
-  //   console.log(err.message);
-  // });
-  // // Query microservice
-  // axios.post('http://localhost:4002/events', event).catch((err) => {
-  //   console.log('Query failed');
-  //   console.log(err.message);
-  // });
-  // // Moderation microservice
-  // axios.post('http://localhost:4003/events', event).catch((err) => {
-  //   console.log('Moderation failed');
-  //   console.log(err.message);
-  // });
-  // res.send({status: 'OK'});
+  axios.post('http://comments-srv:4001/events', event).catch((err) => {
+    console.log('Comment failed');
+    console.log(err.message);
+  });
+  // Query microservice
+  axios.post('http://query-srv:4002/events', event).catch((err) => {
+    console.log('Query failed');
+    console.log(err.message);
+  });
+  // Moderation microservice
+  axios.post('http://moderation-srv:4003/events', event).catch((err) => {
+    console.log('Moderation failed');
+    console.log(err.message);
+  });
+  res.send({status: 'OK'});
 })
 
 // GET route - index of all events
