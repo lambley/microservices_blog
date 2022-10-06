@@ -5,7 +5,7 @@ metadata:
 spec:
   # specifies number of pods to run
   replicas: 1
-  # selector - find all pods with label 'Posts'
+  # selector - find all pods with label 'event-bus'
   selector:
     matchLabels:
       app: event-bus
