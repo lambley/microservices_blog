@@ -19,7 +19,7 @@ app.get('/posts', (req, res) => {
 });
 
 // CREATE
-app.post('/posts', async (req, res) => {
+app.post('/posts/create', async (req, res) => {
   // generate random hex id
   const id = randomBytes(4).toString('hex');
   const { title } = req.body;
