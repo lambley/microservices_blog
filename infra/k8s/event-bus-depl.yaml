@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: event-bus
-          image: docker.io/lambley/event-bus:latest
+          image: lambley/event-bus:latest
 # Cluster IP service (colocated)
 ---
 apiVersion: v1

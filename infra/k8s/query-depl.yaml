@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: query
-          image: docker.io/lambley/query:latest
+          image: lambley/query:latest
 # Cluster IP service (colocated)
 ---
 apiVersion: v1

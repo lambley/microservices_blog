@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: moderation
-          image: docker.io/lambley/moderation:latest
+          image: lambley/moderation:latest
 # Cluster IP service (colocated)
 ---
 apiVersion: v1
