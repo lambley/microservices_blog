@@ -1,0 +1,61 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+# tell skaffold where kubernetes config files are and watch
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+# disable default behaviour to push images to docker hub on build
+build:
+  local:
+    push: false
+  # update pod when context is changed
+  artifacts:
+    - image: lambley/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: lambley/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: lambley/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: lambley/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: lambley/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: lambley/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
