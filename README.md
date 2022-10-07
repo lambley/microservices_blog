@@ -19,5 +19,10 @@ Built and based off [this course](https://www.udemy.com/course/microservices-wit
 - Created from scratch for learning purposes using Express (sending `event data` via an `/events` route in each microservice)
 - Includes an event store (in memory), to account for service downtime and for the Query service to check for missing posts, comments or moderation
 
-## Service Model
+### Service Model
 ![image](https://user-images.githubusercontent.com/42571140/193404032-50b4f4fd-3336-4844-86fa-f80d4503a539.png)
+
+## Docker/Kubernetes setup
+- Build images `Dockerfiles` in each folder
+- Apply kubernetes config files in `infra/k8s` folder (to run deployments and services)
+- On local machine: add line to end of `hosts` file (Windows: `C:\Windows\System32\drivers\etc`; Mac `etc\`). Add this line: `127.0.0.1 posts.com`. NB this redirects traffic going to `posts.com` to local host 
